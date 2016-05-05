@@ -36,11 +36,11 @@ public class ApplicationFormes{
 	 */
 	public ApplicationFormes(){
 		CommBase comm = new CommBase();
-		String serverName = JOptionPane.showInputDialog(null, "Quel est le nom d'hôte et le port du serveur de formes?");
+		String serverName = JOptionPane.showInputDialog(null, "Quel est le nom d'hÃ´te et le port du serveur de formes?");
 		if(serverName != null){
-			String[] parts = serverName.split(":");
-			comm.serverName = parts[0];
-			comm.serverPort = Integer.parseInt(parts[1]);
+//			String[] parts = serverName.split(":");
+//			comm.serverName = parts[0];
+//			comm.serverPort = Integer.parseInt(parts[1]);
 			FenetrePrincipale fenetre = new FenetrePrincipale(comm);	
 			comm.setPropertyChangeListener(fenetre);
 		}

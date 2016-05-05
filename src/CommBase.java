@@ -10,6 +10,8 @@ Historique des modifications
 2013-05-03 Version initiale
 *******************************************************/  
 
+import ca.etsmtl.log.util.IDLogger;
+
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,9 +32,11 @@ public class CommBase {
 	private SwingWorker threadComm =null;
 	private PropertyChangeListener listener = null;
 	private boolean isActif = false;
-	private Socket s = null;
-	private PrintWriter out = null;
-	private BufferedReader in = null;
+	private Socket s;
+	private PrintWriter out;
+	private BufferedReader in;
+	private ShapeInfo shapeInfo;
+	private IDLogger logger;
 	
 	/**
 	 * Constructeur
@@ -41,7 +45,7 @@ public class CommBase {
 	}
 	
 	/**
-	 * Définir le récepteur de l'information reçue dans la communication avec le serveur
+	 * Dï¿½finir le rï¿½cepteur de l'information reï¿½ue dans la communication avec le serveur
 	 * @param listener sera alertÃ© lors de l'appel de "firePropertyChanger" par le SwingWorker
 	 */
 	public void setPropertyChangeListener(PropertyChangeListener listener){
@@ -53,10 +57,14 @@ public class CommBase {
 	 */
 	public void start(){
 		try {
-			s = new Socket(serverName, serverPort);
+//			s = new Socket(serverName, serverPort); TODO remettre
+			s = new Socket("localhost", 10000);
+			shapeInfo = new ShapeInfo();
+			logger = IDLogger.getInstance();
 			creerCommunication();
         } catch (IOException e) {
-        }		
+			System.out.println("Une erreur est survenue Ã  la communication avec le serveur");
+		}
 		
 	}
 	
@@ -70,10 +78,11 @@ public class CommBase {
 				out.close();
 		        in.close();
 		        s.close();
+		        s.close();
+
 	        } catch (IOException e) {
-	            
+				System.out.println("Une erreur est survenue Ã  lors de la fermeture de la connexion avec le serveur");
 	        }
-			
 		}
 		isActif = false;
 	}
@@ -90,19 +99,16 @@ public class CommBase {
 				while(true){
 					Thread.sleep(DELAI);
 					
-					// C'EST DANS CETTE BOUCLE QU'ON COMMUNIQUE AVEC LE SERVEUR
 		            out = new PrintWriter(s.getOutputStream(), true);
 		            in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-
 			        out.println("GET");
-			        System.out.println(in.readLine());
-			        
-					
+
+					shapeInfo.extractServerResponse(in.readLine());
+//					logger.logID(shapeInfo.getNoSeq());
  					//La mÃ©thode suivante alerte l'observateur 
-					if(listener!=null)
-					   firePropertyChange("ENVOIE-TEST", null, (Object) "."); 
+//					if(listener!=null)
+//					   firePropertyChange("ENVOIE-TEST", null, (Object) ".");
 				}
-				//return null;
 			}
 		};
 		if(listener!=null)

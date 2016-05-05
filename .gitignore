@@ -46,3 +46,11 @@ Network Trash Folder
 Temporary Items
 .apdisk
 .settings/org.eclipse.jdt.core.prefs
+.idea/workspace.xml
+.idea/modules.xml
+.idea/compiler.xml
+.idea/vcs.xml
+.idea/misc.xml
+.idea/libraries/ca_etsmtl_log_util.xml
+.idea/copyright/profiles_settings.xml
+.idea/.name

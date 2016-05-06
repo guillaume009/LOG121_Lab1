@@ -41,6 +41,7 @@ public class ApplicationFormes{
 //			String[] parts = serverName.split(":");
 //			comm.serverName = parts[0];
 //			comm.serverPort = Integer.parseInt(parts[1]);
+//			comm.connectToServer();
 			FenetrePrincipale fenetre = new FenetrePrincipale(comm);	
 			comm.setPropertyChangeListener(fenetre);
 		}

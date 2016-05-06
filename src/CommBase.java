@@ -10,6 +10,8 @@ Historique des modifications
 2013-05-03 Version initiale
 *******************************************************/  
 
+import Shape.CreateurFormes;
+import Shape.Forme;
 import ca.etsmtl.log.util.IDLogger;
 
 import java.beans.PropertyChangeListener;
@@ -37,6 +39,7 @@ public class CommBase {
 	private BufferedReader in;
 	private ShapeInfo shapeInfo;
 	private IDLogger logger;
+	private CreateurFormes createur;
 	
 	/**
 	 * Constructeur
@@ -51,21 +54,33 @@ public class CommBase {
 	public void setPropertyChangeListener(PropertyChangeListener listener){
 		this.listener = listener;
 	}
-	
+//	public void connectToServer(){
+//		try {
+//			s = new Socket(serverName, serverPort); TODO remettre
+//			s = new Socket("localhost", 10000);
+//		} catch (IOException e) {
+//			System.out.println("Une erreur est survenue à la communication avec le serveur");
+//		}
+//	}
+//	public void disconnectFromServer(){
+//		try {
+//			s.close();
+//		} catch (IOException e) {
+//			System.out.println("Une erreur est survenue à lors de la fermeture de la connexion avec le serveur");
+//		}
+//	}
 	/**
 	 * Démarre la communication
 	 */
 	public void start(){
 		try {
-//			s = new Socket(serverName, serverPort); TODO remettre
 			s = new Socket("localhost", 10000);
-			shapeInfo = new ShapeInfo();
-			logger = IDLogger.getInstance();
-			creerCommunication();
-        } catch (IOException e) {
+		} catch (IOException e) {
 			System.out.println("Une erreur est survenue à la communication avec le serveur");
 		}
-		
+		shapeInfo = new ShapeInfo();
+		logger = IDLogger.getInstance();
+		creerCommunication();
 	}
 	
 	/**
@@ -75,11 +90,10 @@ public class CommBase {
 		if(threadComm!=null){
 			threadComm.cancel(true); 
 			try {
+				out.println("END");
 				out.close();
 		        in.close();
-		        s.close();
-		        s.close();
-
+				s.close();
 	        } catch (IOException e) {
 				System.out.println("Une erreur est survenue à lors de la fermeture de la connexion avec le serveur");
 	        }
@@ -97,13 +111,12 @@ public class CommBase {
 			protected Object doInBackground() throws Exception {
 				System.out.println("Le fils d'execution parallele est lance");
 				while(true){
-					Thread.sleep(DELAI);
-					
 		            out = new PrintWriter(s.getOutputStream(), true);
 		            in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			        out.println("GET");
 
 					shapeInfo.extractServerResponse(in.readLine());
+					Thread.sleep(DELAI);
 //					logger.logID(shapeInfo.getNoSeq());
  					//La méthode suivante alerte l'observateur 
 //					if(listener!=null)

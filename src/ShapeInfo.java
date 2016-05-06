@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import Shape.*;
 
 /**
  * Created by gui_h on 2016-05-05.
@@ -33,6 +34,9 @@ public class ShapeInfo {
             else{
                 p2 = new Point(Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
             }
+            CreateurFormes createurFormes = new CreateurFormes();
+            Forme f = createurFormes.creerForme(shapeType);
+            f.drawForme();
             System.out.println("Found seq " + m.group(1) + " tag: " + m.group(2) + ", inner string = "
                     + m.group(3));
         }

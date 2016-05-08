@@ -10,8 +10,8 @@ Historique des modifications
 2013-05-03 Version initiale
 *******************************************************/  
 
-import Shape.CreateurFormes;
 import Shape.Forme;
+import Shape.ShapeInfo;
 import ca.etsmtl.log.util.IDLogger;
 
 import java.beans.PropertyChangeListener;
@@ -39,8 +39,7 @@ public class CommBase {
 	private BufferedReader in;
 	private ShapeInfo shapeInfo;
 	private IDLogger logger;
-	private CreateurFormes createur;
-	
+
 	/**
 	 * Constructeur
 	 */
@@ -115,12 +114,12 @@ public class CommBase {
 		            in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			        out.println("GET");
 
-					shapeInfo.extractServerResponse(in.readLine());
+					Forme f = shapeInfo.extractServerResponse(in.readLine());
 					Thread.sleep(DELAI);
 //					logger.logID(shapeInfo.getNoSeq());
  					//La méthode suivante alerte l'observateur 
-//					if(listener!=null)
-//					   firePropertyChange("ENVOIE-TEST", null, (Object) ".");
+					if(listener!=null)
+					   firePropertyChange("newForme", null, f);
 				}
 			}
 		};

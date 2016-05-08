@@ -19,16 +19,22 @@ public class CreateurFormes {
      * @return une instance d'une des sous-classes de la classe abstraite
      *         Forme avec les paramètres passés par la chaîne d'entrée.
      */
-    public Forme creerForme(String chaineForme) {
+    public Forme creerForme(String chaineForme,ShapeInfo s) {
         Forme f;
         if(chaineForme.equals("CERCLE")){
-            f = new Cercle();
+            f = new Cercle(s.getP1(),s.getRayon1());
         }
         else if(chaineForme.equals("OVALE")){
-            f = new Ovale();
+            f = new Cercle(s.getP1(),s.getRayon1(),s.getRayon2());
+        }
+        else if(chaineForme.equals("LIGNE")){
+            f = new Ligne(s.getP1(),s.getP2());
+        }
+        else if(chaineForme.equals("CARRE")) {
+            f = new Carre(s.getP1(), s.getP2(),true);
         }
         else{
-            f = new Carre();
+            f = new Carre(s.getP1(), s.getP2(),false);
         }
         return f;
     }

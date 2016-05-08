@@ -1,3 +1,5 @@
+package Shape;
+
 import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,8 +19,10 @@ public class ShapeInfo {
 
     public ShapeInfo(){}
 
-    public void extractServerResponse(String serverResponse){
+    public Forme extractServerResponse(String serverResponse){
         Matcher m = p.matcher(serverResponse);
+        CreateurFormes createurFormes = new CreateurFormes();
+        Forme f = null;
         while (m.find()) {
             noSeq = m.group(1);
             shapeType = m.group(2);
@@ -34,12 +38,11 @@ public class ShapeInfo {
             else{
                 p2 = new Point(Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
             }
-            CreateurFormes createurFormes = new CreateurFormes();
-            Forme f = createurFormes.creerForme(shapeType);
-            f.drawForme();
             System.out.println("Found seq " + m.group(1) + " tag: " + m.group(2) + ", inner string = "
                     + m.group(3));
+            f = createurFormes.creerForme(shapeType,this);
         }
+        return f;
     }
 
     public String getShapeType() {

@@ -13,7 +13,6 @@ Historique des modifications
 import Shape.Forme;
 import Shape.ShapeInfo;
 import ca.etsmtl.log.util.IDLogger;
-
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -74,6 +73,7 @@ public class CommBase {
 	public void start(){
 		try {
 			s = new Socket("localhost", 10000);
+			logger = IDLogger.getInstance();
 		} catch (IOException e) {
 			System.out.println("Une erreur est survenue à la communication avec le serveur");
 		}
@@ -115,9 +115,11 @@ public class CommBase {
 			        out.println("GET");
 
 					Forme f = shapeInfo.extractServerResponse(in.readLine());
+					if(f != null) {
+						logger.logID(shapeInfo.getNoSeq());
+					}
 					Thread.sleep(DELAI);
-//					logger.logID(shapeInfo.getNoSeq());
- 					//La méthode suivante alerte l'observateur 
+ 					//La méthode suivante alerte l'observateur
 					if(listener!=null)
 					   firePropertyChange("newForme", null, f);
 				}

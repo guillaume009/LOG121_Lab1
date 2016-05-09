@@ -15,10 +15,12 @@ public class Carre extends Forme {
     }
     @Override
     public void paint(Graphics g) {
-//        System.out.println("Je suis un carre/rectangle");
         if(isSquare) {
             double distance = Math.sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y));//Calcul la distance de la diagonale entre les deux points
             int height = (int) Math.sqrt(distance * distance / 2);
+            if(height == 0){//TODO Verifier si ok
+                height = 1;
+            }
             g.setColor(Color.red);
             g.fillRect (p1.x,p1.y,height,height);
         }

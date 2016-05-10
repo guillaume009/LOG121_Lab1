@@ -8,8 +8,7 @@ import java.awt.*;
  */
 public class Cercle extends Forme {
     private Point p;
-    private int rayonH = 0;
-    private int rayonW = 0;
+    private int rayonH = 0, rayonW = 0;
     /***
      * Constructeur de la classe pour les cercles
      * @param p les coordonnées du point

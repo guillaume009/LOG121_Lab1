@@ -32,7 +32,7 @@ public class CommBase {
 	
 	public static String serverName = "";
 	public static int serverPort = 0;
-	private final int DELAI = 1000;
+	private final int DELAI = 1;
 	private SwingWorker threadComm =null;
 	private PropertyChangeListener listener = null;
 	private boolean isActif = false;

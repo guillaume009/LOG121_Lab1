@@ -57,7 +57,7 @@ public class FenetreFormes extends JComponent{
      */
 	public void addFormeToList(Forme f){
 		boolean added = false;
-		for(int i = 0; i < arf.length - 1; i++){
+		for(int i = 0; i < arf.length; i++){
 			if(arf[i] == null){
 				arf[i] = f;
 				added = true;

@@ -3,9 +3,9 @@ package Shape;
 import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import Shape.*;
 
 /**
+ * Classe qui gére la chaine du serveur et la transforme en informations sur la forme
  * Created by gui_h on 2016-05-05.
  */
 public class ShapeInfo {
@@ -19,6 +19,12 @@ public class ShapeInfo {
 
     public ShapeInfo(){}
 
+    /***
+     * Sépare la chaine de caractères que le serveur envoit et sépare les différentes informations.
+     * Une forme est ensuite créer avec les données du serveur
+     * @param serverResponse
+     * @return Retourne la forme correspondante aux données de la chaine en paramètre
+     */
     public Forme extractServerResponse(String serverResponse){
         Matcher m = p.matcher(serverResponse);
         CreateurFormes createurFormes = new CreateurFormes();

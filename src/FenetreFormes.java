@@ -1,14 +1,17 @@
 /******************************************************
-Cours:  LOG121
-Projet: Squelette du laboratoire #1
-Nom du fichier: FenetreFormes.java
-Date créé: 2013-05-03
-*******************************************************
-Historique des modifications
-*******************************************************
-*@author Patrice Boucher
+ Cours:  LOG121
+ Projet: Squelette du laboratoire #1
+ Nom du fichier: CommBase.java
+ Date créé: 2013-05-03
+ *******************************************************
+ Historique des modifications
+ *******************************************************
+ *@author Patrice Boucher
 2013-05-03 Version initiale
-*******************************************************/  
+ *******************************************************
+ *@author Guillaume Boudreau
+2016-05-05 Ajout des fonctions pour le labo 1
+ *******************************************************/
 
 import Shape.Forme;
 
@@ -34,10 +37,11 @@ public class FenetreFormes extends JComponent{
 	 */
 	public FenetreFormes(){
 	}
-	
-	/*
-	 * Affiche la liste de formes 
-	 */
+
+	/***
+	 * Passe au travers du tableau des formes et affiche chacun d'eux
+	 * @param g Permet de dessiner les formes
+     */
 	@Override 
 	public void paint(Graphics g){
 		for(Forme f : arf){
@@ -46,6 +50,11 @@ public class FenetreFormes extends JComponent{
 			}
 		}
 	}
+
+	/***
+	 * Ajoute une forme à la liste de forme et supprime la plus vieille s'il y en a déjà 10
+	 * @param f La forme à ajouter
+     */
 	public void addFormeToList(Forme f){
 		boolean added = false;
 		for(int i = 0; i < arf.length - 1; i++){

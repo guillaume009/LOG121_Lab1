@@ -1,6 +1,7 @@
 package Shape;
 
 /**
+ * Classe qui permet d'instancier une forme
  * Created by gui_h on 2016-05-06.
  */
 public class CreateurFormes {

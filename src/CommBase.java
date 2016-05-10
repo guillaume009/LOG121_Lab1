@@ -8,7 +8,10 @@ Historique des modifications
 *******************************************************
 *@author Patrice Boucher
 2013-05-03 Version initiale
-*******************************************************/  
+*******************************************************
+*@author Guillaume Boudreau
+	2016-05-05 Ajout des fonctions pour le labo 1
+*******************************************************/
 
 import Shape.Forme;
 import Shape.ShapeInfo;
@@ -46,7 +49,7 @@ public class CommBase {
 	}
 	
 	/**
-	 * D�finir le r�cepteur de l'information re�ue dans la communication avec le serveur
+	 * Définir le récepteur de l'information reçue dans la communication avec le serveur
 	 * @param listener sera alerté lors de l'appel de "firePropertyChanger" par le SwingWorker
 	 */
 	public void setPropertyChangeListener(PropertyChangeListener listener){
@@ -68,18 +71,19 @@ public class CommBase {
 //		}
 //	}
 	/**
-	 * Démarre la communication
+	 * Démarre la communication et instancie les différents éléments nécessaire
 	 */
 	public void start(){
 		try {
 			s = new Socket("localhost", 10000);
 			logger = IDLogger.getInstance();
+			out = new PrintWriter(s.getOutputStream(), true);
+			shapeInfo = new ShapeInfo();
+			logger = IDLogger.getInstance();
+			gererCommunication();
 		} catch (IOException e) {
 			System.out.println("Une erreur est survenue à la communication avec le serveur");
 		}
-		shapeInfo = new ShapeInfo();
-		logger = IDLogger.getInstance();
-		creerCommunication();
 	}
 	
 	/**
@@ -101,32 +105,31 @@ public class CommBase {
 	}
 	
 	/**
-	 * Créer le nécessaire pour la communication avec le serveur
+	 * Créer le nécessaire pour la communication avec le serveur et reçoit les chaines de caratères de celui-ci
+	 * Ajoute également le numéro de séquence au log
 	 */
-	protected void creerCommunication(){		
+	protected void gererCommunication(){
 		// Crée un fil d'exécusion parallèle au fil courant,
 		threadComm = new SwingWorker(){
 			@Override
 			protected Object doInBackground() throws Exception {
 				System.out.println("Le fils d'execution parallele est lance");
 				while(true){
-		            out = new PrintWriter(s.getOutputStream(), true);
-		            in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-			        out.println("GET");
-
+					in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+					out.println("GET");
 					Forme f = shapeInfo.extractServerResponse(in.readLine());
 					if(f != null) {
-						logger.logID(shapeInfo.getNoSeq());
+						if(listener!=null) {//Alerte l'observateur
+							firePropertyChange("newForme", null, f);
+							logger.logID(shapeInfo.getNoSeq());
+						}
 					}
 					Thread.sleep(DELAI);
- 					//La méthode suivante alerte l'observateur
-					if(listener!=null)
-					   firePropertyChange("newForme", null, f);
 				}
 			}
 		};
 		if(listener!=null)
-		   threadComm.addPropertyChangeListener(listener); // La méthode "propertyChange" de ApplicationFormes sera donc appelée lorsque le SwinkWorker invoquera la méthode "firePropertyChanger" 		
+		   threadComm.addPropertyChangeListener(listener); // La méthode "propertyChange" de ApplicationFormes sera donc appelée lorsque le SwinkWorker invoquera la méthode "firePropertyChanger"
 		threadComm.execute(); // Lance le fil d'exécution parallèle.
 		isActif = true;
 	}

@@ -1,18 +1,18 @@
 /******************************************************
-Cours:  LOG121
-Projet: Squelette du laboratoire #1
-Nom du fichier: ApplicationFormes.java
-Date créé: 2013-05-03
-*******************************************************
-Historique des modifications
-*******************************************************
-*@author Patrice Boucher
+ Cours:  LOG121
+ Projet: Squelette du laboratoire #1
+ Nom du fichier: CommBase.java
+ Date créé: 2013-05-03
+ *******************************************************
+ Historique des modifications
+ *******************************************************
+ *@author Patrice Boucher
 2013-05-03 Version initiale
-*******************************************************/  
- 
+ *******************************************************
+ *@author Guillaume Boudreau
+2016-05-05 Ajout des fonctions pour le labo 1
+ *******************************************************/
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 import javax.swing.JOptionPane;
 
@@ -33,6 +33,8 @@ public class ApplicationFormes{
 	
 	/**
 	 * Constructeur
+	 * Affiche une boite de dialogue pour que l'utilisateur puisse choisir le serveur et le port
+	 * Sépare ensuite le serveur et le port pour les mettre dans des variables pour l'utilisateur par après
 	 */
 	public ApplicationFormes(){
 		CommBase comm = new CommBase();

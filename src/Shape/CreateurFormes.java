@@ -32,10 +32,10 @@ public class CreateurFormes {
             f = new Ligne(s.getP1(),s.getP2());
         }
         else if(chaineForme.equals("CARRE")) {
-            f = new rectangle(s.getP1(), s.getP2(),true);
+            f = new Rectangle(s.getP1(), s.getP2(),true);
         }
         else{
-            f = new rectangle(s.getP1(), s.getP2(),false);
+            f = new Rectangle(s.getP1(), s.getP2(),false);
         }
         return f;
     }

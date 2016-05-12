@@ -3,10 +3,10 @@ package Shape;
 import java.awt.*;
 
 /**
- * Class qui permet de dessiner un carré ou un rectangle
+ * Class qui permet de dessiner un carré ou un Rectangle
  * Created by gui_h on 2016-05-06.
  */
-public class rectangle extends Forme {
+public class Rectangle extends Forme {
     private Point p1,p2;
     private boolean isSquare;
 
@@ -16,7 +16,7 @@ public class rectangle extends Forme {
      * @param p2 les coordonnées du deuxième point
      * @param square Boolean en fonction de si c'est un carré
      */
-    public rectangle(Point p1, Point p2, boolean square){
+    public Rectangle(Point p1, Point p2, boolean square){
         this.p1 = p1;
         this.p2 = p2;
         this.isSquare = square;

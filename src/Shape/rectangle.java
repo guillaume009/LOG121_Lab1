@@ -31,10 +31,7 @@ public class Rectangle extends Forme {
         int width = p2.x - p1.x;
         int height = p2.y - p1.y;
         if(isSquare) {
-//            double distance = Math.sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y));//Calcul la distance de la diagonale entre les deux points
-//            int height = (int) Math.sqrt(distance * distance / 2);
             g.setColor(Color.red);
-//            g.fillRect (p1.x,p1.y,height,height);
         }
         else{
             g.setColor(Color.blue);

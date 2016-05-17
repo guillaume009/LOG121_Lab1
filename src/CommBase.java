@@ -32,7 +32,7 @@ public class CommBase {
 	
 	public static String serverName = "";
 	public static int serverPort = 0;
-	private final int DELAI = 1;
+	private final int DELAI = 1000;
 	private SwingWorker threadComm =null;
 	private PropertyChangeListener listener = null;
 	private boolean isActif = false;
@@ -45,8 +45,7 @@ public class CommBase {
 	/**
 	 * Constructeur
 	 */
-	public CommBase(){
-	}
+	public CommBase(){}
 	
 	/**
 	 * Définir le récepteur de l'information reçue dans la communication avec le serveur
@@ -55,27 +54,12 @@ public class CommBase {
 	public void setPropertyChangeListener(PropertyChangeListener listener){
 		this.listener = listener;
 	}
-//	public void connectToServer(){
-//		try {
-//			s = new Socket(serverName, serverPort); TODO remettre
-//			s = new Socket("localhost", 10000);
-//		} catch (IOException e) {
-//			System.out.println("Une erreur est survenue à la communication avec le serveur");
-//		}
-//	}
-//	public void disconnectFromServer(){
-//		try {
-//			s.close();
-//		} catch (IOException e) {
-//			System.out.println("Une erreur est survenue à lors de la fermeture de la connexion avec le serveur");
-//		}
-//	}
 	/**
 	 * Démarre la communication et instancie les différents éléments nécessaire
 	 */
 	public void start(){
 		try {
-			s = new Socket("localhost", 10000);
+			s = new Socket(serverName, serverPort);
 			logger = IDLogger.getInstance();
 			out = new PrintWriter(s.getOutputStream(), true);
 			shapeInfo = new ShapeInfo();

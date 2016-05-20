@@ -31,7 +31,6 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	
 	private static final long serialVersionUID = -1210804336046370508L;
 	private FenetreFormes fenetreFormes;
-	private ArrayList<Forme> arf = new ArrayList<Forme>();
 
 	/**
 	 * Constructeur

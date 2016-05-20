@@ -13,25 +13,23 @@ public class CreateurFormes {
      * forme il s'agit et applique l'opérateur new sur le constructeur de
      * la forme désirée.
      *
-     * @param chaineForme un objet String contenant la chaîne de caractères
-     *                    qui décrit une forme et provenant du serveur de
-     *                    formes.
+     * @param s un objet contenant toutes les données sur la forme provenant du serveur
      *
      * @return une instance d'une des sous-classes de la classe abstraite
      *         Forme avec les paramètres passés par la chaîne d'entrée.
      */
-    public Forme creerForme(String chaineForme,ShapeInfo s) {
+    public Forme creerForme(ShapeInfo s) {
         Forme f;
-        if(chaineForme.equals("CERCLE")){
+        if(s.getShapeType().equals("CERCLE")){
             f = new Cercle(s.getP1(),s.getRayon1());
         }
-        else if(chaineForme.equals("OVALE")){
+        else if(s.getShapeType().equals("OVALE")){
             f = new Cercle(s.getP1(),s.getRayon1(),s.getRayon2());
         }
-        else if(chaineForme.equals("LIGNE")){
+        else if(s.getShapeType().equals("LIGNE")){
             f = new Ligne(s.getP1(),s.getP2());
         }
-        else if(chaineForme.equals("CARRE")) {
+        else if(s.getShapeType().equals("CARRE")) {
             f = new Rectangle(s.getP1(), s.getP2(),true);
         }
         else{

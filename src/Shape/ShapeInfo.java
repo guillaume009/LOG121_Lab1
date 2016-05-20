@@ -46,7 +46,7 @@ public class ShapeInfo {
             }
             System.out.println("Found seq " + m.group(1) + " tag: " + m.group(2) + ", inner string = "
                     + m.group(3));
-            f = createurFormes.creerForme(shapeType,this);
+            f = createurFormes.creerForme(this);
         }
         return f;
     }

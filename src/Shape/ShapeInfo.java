@@ -44,8 +44,6 @@ public class ShapeInfo {
             else{
                 p2 = new Point(Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
             }
-            System.out.println("Found seq " + m.group(1) + " tag: " + m.group(2) + ", inner string = "
-                    + m.group(3));
             f = createurFormes.creerForme(this);
         }
         return f;
